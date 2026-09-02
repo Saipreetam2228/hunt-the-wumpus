@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wumpus World — AI Reasoning Game</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">AI • KNOWLEDGE-BASED AGENT</div>
+        <h1>Wumpus World</h1>
+        <p>Find the gold. Use percepts and logic. Escape alive.</p>
+      </div>
+      <button id="newGameBtn" class="primary">↻ New Game</button>
+    </header>
+
+    <main class="layout">
+      <section class="game-panel">
+        <div class="stats">
+          <div><span>Score</span><strong id="score">0</strong></div>
+          <div><span>Lives</span><strong id="lives">1</strong></div>
+          <div><span>Arrows</span><strong id="arrows">1</strong></div>
+          <div><span>Position</span><strong id="position">[1,1]</strong></div>
+        </div>
+
+        <div id="message" class="message">Explore carefully. Your starting square is safe.</div>
+
+        <div id="board" class="board" aria-label="4 by 4 Wumpus World board"></div>
+
+        <div class="controls">
+          <button data-action="turnLeft">↶ Turn Left</button>
+          <button data-action="forward" class="primary">↑ Move Forward</button>
+          <button data-action="turnRight">↷ Turn Right</button>
+          <button data-action="grab">✋ Grab</button>
+          <button data-action="shoot">🏹 Shoot</button>
+          <button data-action="climb">🚪 Climb</button>
+        </div>
+
+        <div class="keyboard">
+          <b>Keyboard:</b> W / ↑ Move • A / ← Turn Left • D / → Turn Right • G Grab • S Shoot • C Climb
+        </div>
+      </section>
+
+      <aside class="side-panel">
+        <section class="card">
+          <h2>Current Percepts</h2>
+          <div id="percepts" class="percepts"></div>
+        </section>
+
+        <section class="card">
+          <h2>What does the agent know?</h2>
+          <div id="knowledge" class="knowledge">
+            <p>Start by observing your percepts. The agent cannot see hidden squares.</p>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Exam Memory</h2>
+          <div class="memory-grid">
+            <span>🟢 STENCH</span><span>Wumpus nearby</span>
+            <span>💨 BREEZE</span><span>Pit nearby</span>
+            <span>✨ GLITTER</span><span>Gold here</span>
+            <span>💥 BUMP</span><span>Wall hit</span>
+            <span>📢 SCREAM</span><span>Wumpus killed</span>
+          </div>
+        </section>
+
+        <section class="card rules">
+          <h2>How to Win</h2>
+          <ol>
+            <li>Use percepts to infer safe squares.</li>
+            <li>Find and grab the gold.</li>
+            <li>Return to <b>[1,1]</b>.</li>
+            <li>Press <b>Climb</b> to escape.</li>
+          </ol>
+          <p class="tip">Tip: No Breeze means adjacent squares contain no pits. No Stench means adjacent squares contain no Wumpus.</p>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <div id="modalIcon" class="modal-icon">🏆</div>
+      <h2 id="modalTitle">You Escaped!</h2>
+      <p id="modalText"></p>
+      <button id="modalNewGame" class="primary">Play Again</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
